@@ -1,1 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise 💖</title>
 
+<style>
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:url("pic14.jpeg") no-repeat center center fixed;
+    background-size:1600px 800px;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* DARK OVERLAY */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    z-index:-1;
+}
+
+/* SECTION */
+section{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+/* GLASS BOX */
+.box{
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:20px;
+}
+
+/* DOOR */
+.door-box{
+    width:260px;
+    height:350px;
+    position:relative;
+    perspective:1000px;
+}
+
+.door{
+    position:absolute;
+    width:50%;
+    height:100%;
+    background:linear-gradient(#222,#000);
+    transition:1.8s;
+}
+
+.left{left:0;transform-origin:left;}
+.right{right:0;transform-origin:right;}
+
+.open .left{transform:rotateY(-110deg);}
+.open .right{transform:rotateY(110deg);}
+
+/* BUTTON */
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:linear-gradient(45deg,#ff9a9e,#fad0c4);
+    cursor:pointer;
+}
+
+/* GALLERY */
+.gallery{
+    display:flex;
+    flex-direction:column;
+    gap:80px;
+    padding:40px;
+}
+
+.item{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s;
+}
+
+.item.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+img,video{
+    width:280px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+/* TEXT */
+#bigText{
+    font-size:2.2em;
+    color:gold;
+    margin-top:40px;
+}
+
+/* VOICE */
+.voice{
+    margin-top:30px;
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- DOOR -->
+<section>
+<div class="box">
+    <div class="door-box" id="door">
+        <div class="door left"></div>
+        <div class="door right"></div>
+    </div>
+    <button onclick="openDoor()">Open Surprise 🎁</button>
+</div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+<div class="box">
+<h2>🎵 Play Music</h2>
+<button onclick="playMusic()">Play</button>
+<button onclick="go('message')">Next</button>
+</div>
+</section>
+
+<!-- MESSAGE -->
+<section id="message">
+<div class="box">
+<h1 id="type"></h1>
+<button onclick="go('pass')">Enter 💖</button>
+</div>
+</section>
+
+<!-- PASSWORD -->
+<section id="pass">
+<div class="box">
+<h3>Enter Secret 🔐</h3>
+<input id="pwd" type="password">
+<button onclick="check()">Unlock</button>
+</div>
+</section>
+
+<!-- SURPRISE -->
+<section id="surprise">
+<h1>✨ Memories ✨</h1>
+
+<div class="gallery" id="gallery"></div>
+
+<h2 id="bigText"></h2>
+
+<div class="voice">
+<button onclick="voice()">🎤 Play Voice Message</button>
+</div>
+</section>
+
+<audio id="musicAudio" src="music.mp3"></audio>
+<audio id="voiceAudio" src="voice.mp3"></audio>
+
+<script>
+// DOOR
+function openDoor(){
+    document.getElementById("door").classList.add("open");
+    setTimeout(()=>go('music'),1800);
+}
+
+// SCROLL
+function go(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+// MUSIC
+function playMusic(){
+    document.getElementById("musicAudio").play();
+}
+
+// PASSWORD
+function check(){
+    if(document.getElementById("pwd").value==="1234"){
+        go('surprise');
+        loadGallery();
+        bigMessage();
+    } else alert("Wrong Password!");
+}
+
+// TYPING TEXT
+let txt="Happy Birthday 💖 You are truly special...";
+let i=0;
+(function type(){
+    if(i<txt.length){
+        document.getElementById("type").innerHTML+=txt[i++];
+        setTimeout(type,50);
+    }
+})();
+
+// LOAD GALLERY
+function loadGallery(){
+    let g=document.getElementById("gallery");
+
+    for(let i=1;i<=12;i++){
+        let d=document.createElement("div");
+        d.className="item";
+        d.innerHTML=`<img src="img${i}.jpg"><p>Memory ${i}</p>`;
+        g.appendChild(d);
+        setTimeout(()=>d.classList.add("show"),i*250);
+    }
+
+    ["video1.mp4","video2.mp4"].forEach((v,i)=>{
+        let d=document.createElement("div");
+        d.className="item";
+        d.innerHTML=`<video controls src="${v}"></video>`;
+        g.appendChild(d);
+        setTimeout(()=>d.classList.add("show"),3500+i*300);
+    });
+}
+
+// BIG MESSAGE
+function bigMessage(){
+    let msg="💛 Stay happy forever. This moment is just for you 💛";
+    let j=0;
+    (function type(){
+        if(j<msg.length){
+            document.getElementById("bigText").innerHTML+=msg[j++];
+            setTimeout(type,40);
+        }
+    })();
+}
+
+// VOICE
+function voice(){
+    document.getElementById("voiceAudio").play();
+}
+</script>
+
+</body>
+</html>
