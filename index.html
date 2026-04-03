@@ -55,11 +55,11 @@ button:hover{transform:scale(1.1)}
 .type{border-right:3px solid white;white-space:nowrap;overflow:hidden}
 
 /* GALLERY */
-.gallery{width:90%}
+.gallery{width:50%}
 .card{
   margin:60px auto;
   padding:20px;
-  width:70%;
+  width:50%;
   background:rgba(255,255,255,0.08);
   border-radius:20px;
   backdrop-filter:blur(10px);
@@ -92,12 +92,6 @@ button:hover{transform:scale(1.1)}
   <button onclick="openDoor()">Click Here</button>
 </section>
 
-<!-- MUSIC -->
-<section>
-  <h1>🎵 Click to Start Music</h1>
-  <button onclick="playMusic()">Play Music</button>
-  <audio id="music" src="music.mp3"></audio>
-</section>
 
 <!-- MESSAGE -->
 <section>
@@ -112,12 +106,18 @@ button:hover{transform:scale(1.1)}
   <button onclick="check()">Unlock</button>
 </section>
 
+<section>
+  <h1>🎵 Click to Start Music</h1>
+  <button onclick="playMusic()">Play Music</button>
+  <audio id="music" src="music.mp3"></audio>
+</section>
+
 <!-- GALLERY -->
 <section class="gallery">
   <h1>💖 Memories 💖</h1>
 
   <!-- IMAGES -->
-  <div class="gallery"><img src="pic2.jpeg"><p>HAPPIEST BIRTHDAY SHANKYYYY👀❤️🫂</p></div>
+  <div class="gallery"><img src="pic2.jpeg"><p>HAPPIEST BIRTHDAY SHANKYYYY👀❤️🫂</p></div><br>
   <div class="gallery"><img src="pic3.jpeg"><p>STAY KUSH FOREVER👀❤️🫂</p></div>
   <div class="gallery"><img src="pic4.jpeg"><p>MOST FAV PERSON👀❤️🫂</p></div>
   <div class="gallery"><img src="pic5.jpeg"><p>SPECIAL ONE FOREVER👀❤️🫂</p></div>
@@ -133,6 +133,9 @@ button:hover{transform:scale(1.1)}
   <!-- VIDEOS -->
   <div class="gallery"><video controls src="vid1.mp4"></video><p>💎🫶🏻🌍</p></div>
   <div class="gallery"><video controls src="video2.mp4"></video><p>🎥A SPECIAL VIDEO JUST FOR YOU❤️</p></div>
+  
+ 
+
 
   <!-- BIG MESSAGE -->
   <div class="big" id="bigMsg"></div>
